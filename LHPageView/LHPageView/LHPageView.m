@@ -16,7 +16,7 @@
 @implementation LHPageScollView
 
 #pragma makr - UIGestureRecognizerDelegate
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch;{
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch{
 
     return NO;
 }
@@ -25,18 +25,20 @@
 
 @interface LHPageView ()
 {
-    UIView * leftView;
-    UIView * mainView;
-    UIView * rightView;
+    UIView * leftView;//左视图父控件
+    UIView * mainView;//展示视图父控件
+    UIView * rightView;//右视图父控件
     
     CGFloat pageWidth;
     
     BOOL _obtainView;//是否获取view
+    BOOL transitionCompleted;//是否手动拖动
     CGFloat elasticity;//弹性
 }
-@property (nonatomic,strong) UIView *currentView;//当前显示view
+
 @property (nonatomic,strong) UIView *toView;//将要显示view
 @property (nonatomic,strong) LHPageScollView *scrollView;
+@property (nonatomic,strong) UIPageControl *pageControl;
 
 @end
 
@@ -58,6 +60,7 @@
     _scrollView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
     _scrollView.alwaysBounceHorizontal = YES;
     _scrollView.decelerationRate = 1;
+    _scrollView.scrollsToTop = NO;
 
     [self addSubview:_scrollView];
     _scrollView.decelerationRate = 10;
@@ -76,6 +79,18 @@
     self.scrollView.contentOffset = CGPointMake(width, 0);
 
     [self addGestureRecognizer:[[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(pan:)]];
+
+
+
+    self.pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(0, self.frame.size.height-20, CGRectGetWidth(self.frame), 20)];
+    self.pageControl.pageIndicatorTintColor = [UIColor whiteColor];
+    self.pageControl.currentPageIndicatorTintColor = [UIColor redColor];
+    [self addSubview:self.pageControl];
+
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        self.pageControl.numberOfPages = [self countOfPageControl];
+        self.pageControl.currentPage = [self indexOfPageControl];
+    });
 }
 
 - (void)pan:(UIPanGestureRecognizer *)pan{
@@ -86,13 +101,16 @@
     self.scrollView.contentOffset = CGPointMake(_x, 0);
     [pan setTranslation:CGPointZero inView:self];
 
+
     if (_scrollView.contentOffset.x < self.frame.size.width && _obtainView) {
+          //获取左侧view
         _obtainView = NO;
         _toView =  [self.dataSource pageView:self viewBeforeView:_currentView];
         _toView.frame = self.bounds;
         [leftView addSubview:_toView];
 
     }else if(_scrollView.contentOffset.x > self.frame.size.width && _obtainView){
+          //获取右侧view
         _obtainView = NO;
         _toView = [self.dataSource pageView:self viewAfterView:_currentView];
         _toView.frame = self.bounds;
@@ -104,11 +122,13 @@
     }
 
     if (pan.state == UIGestureRecognizerStateEnded) {
+        //手动拖动
+        transitionCompleted = YES;
         elasticity = 1;
        _obtainView = YES;
         __weak __typeof(self)weakSelf = self;
         if ((_scrollView.contentOffset.x < self.frame.size.width-20) && _toView) {
-
+       //左侧view滑出
             CGFloat time = _scrollView.contentOffset.x/self.frame.size.width/5;
             [UIView animateWithDuration:time animations:^{
                 [weakSelf scrollToLeftAnima:NO];
@@ -118,7 +138,7 @@
             });
 
         }else if((_scrollView.contentOffset.x > self.frame.size.width+20) && _toView){
-
+      //右侧view滑出
             CGFloat time = (_scrollView.contentOffset.x- self.frame.size.width)/self.frame.size.width/5;
             [UIView animateWithDuration:time animations:^{
                 [weakSelf scrollToRightAnima:NO];
@@ -127,9 +147,11 @@
                 [weakSelf updateMainView];
             });
         }else{
-
+    //返回mainView
             [self scrollToMainAnima:YES];
-
+            if ([self.delegate respondsToSelector:@selector(pageView:didFinishAnimating:previousView:transitionCompleted:)]) {
+                [self.delegate pageView:self didFinishAnimating:YES previousView:_currentView transitionCompleted:transitionCompleted];
+            }
         }
     }else if(pan.state == UIGestureRecognizerStateBegan){
         if ([self.delegate respondsToSelector:@selector(pageView:willTransitionToView:)]) {
@@ -144,7 +166,8 @@
     }
     _toView = view;
     _toView.frame = self.bounds;
-
+    //非手动拖动
+    transitionCompleted = NO;
     if (direction == LHPageViewDirectionForward) {
         [leftView addSubview:_toView];
         if (anime) {
@@ -191,9 +214,22 @@
      [_scrollView setContentOffset:CGPointMake(self.frame.size.width, 0) animated:anima];
 }
 
+//
+- (NSInteger)countOfPageControl{
+    if ([self.dataSource respondsToSelector:@selector(presentationCountForPageView:)]) {
+        return  [self.dataSource presentationCountForPageView:self];
+    }
+    return 0;
+}
+
+- (NSInteger)indexOfPageControl{
+    if ([self.dataSource respondsToSelector:@selector(presentationIndexForPageView:)]) {
+        return  [self.dataSource presentationIndexForPageView:self];
+    }
+    return 0;
+}
+
 - (void)updateMainView{
-
-
 
     _currentView = _toView;
 
@@ -202,8 +238,12 @@
     }
     [mainView addSubview:_currentView];
     [self scrollToMainAnima:NO];
+
     if ([self.delegate respondsToSelector:@selector(pageView:didFinishAnimating:previousView:transitionCompleted:)]) {
-        [self.delegate pageView:self didFinishAnimating:YES previousView:_currentView transitionCompleted:YES];
+        [self.delegate pageView:self didFinishAnimating:YES previousView:_currentView transitionCompleted:transitionCompleted];
+    }
+    if (self.pageControl) {
+        self.pageControl.currentPage = [self indexOfPageControl];
     }
 }
 

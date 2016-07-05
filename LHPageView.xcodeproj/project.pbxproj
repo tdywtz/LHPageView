@@ -15,6 +15,7 @@
 		4DCA84801D2661D00010479B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4DCA847E1D2661D00010479B /* LaunchScreen.storyboard */; };
 		4DCA848B1D2661D00010479B /* LHPageViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DCA848A1D2661D00010479B /* LHPageViewTests.m */; };
 		4DCA84961D2661D00010479B /* LHPageViewUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DCA84951D2661D00010479B /* LHPageViewUITests.m */; };
+		4DCA84A71D2662280010479B /* LHPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DCA84A61D2662280010479B /* LHPageView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,8 @@
 		4DCA84911D2661D00010479B /* LHPageViewUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LHPageViewUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4DCA84951D2661D00010479B /* LHPageViewUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LHPageViewUITests.m; sourceTree = "<group>"; };
 		4DCA84971D2661D00010479B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4DCA84A51D2662280010479B /* LHPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LHPageView.h; sourceTree = "<group>"; };
+		4DCA84A61D2662280010479B /* LHPageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LHPageView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +104,7 @@
 		4DCA846F1D2661D00010479B /* LHPageView */ = {
 			isa = PBXGroup;
 			children = (
+				4DCA84A41D2662150010479B /* LHPageView */,
 				4DCA84731D2661D00010479B /* AppDelegate.h */,
 				4DCA84741D2661D00010479B /* AppDelegate.m */,
 				4DCA84761D2661D00010479B /* ViewController.h */,
@@ -138,6 +142,15 @@
 				4DCA84971D2661D00010479B /* Info.plist */,
 			);
 			path = LHPageViewUITests;
+			sourceTree = "<group>";
+		};
+		4DCA84A41D2662150010479B /* LHPageView */ = {
+			isa = PBXGroup;
+			children = (
+				4DCA84A51D2662280010479B /* LHPageView.h */,
+				4DCA84A61D2662280010479B /* LHPageView.m */,
+			);
+			path = LHPageView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -273,6 +286,7 @@
 				4DCA84781D2661D00010479B /* ViewController.m in Sources */,
 				4DCA84751D2661D00010479B /* AppDelegate.m in Sources */,
 				4DCA84721D2661D00010479B /* main.m in Sources */,
+				4DCA84A71D2662280010479B /* LHPageView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
