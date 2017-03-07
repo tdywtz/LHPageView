@@ -20,7 +20,10 @@ typedef NS_ENUM(NSInteger,LHPageViewDirection) {
 @property (nonatomic,weak) id <LHPageViewDelegate> delegate;
 @property (nonatomic,weak) id <LHPageViewDataSource> dataSource;
 @property (nonatomic,strong,readonly) UIView *currentView;//当前显示view
+@property (nonatomic,assign)          NSInteger numberOfPages;
+@property (nonatomic,assign)          NSInteger currentPage;
 
+- (instancetype)initWithFrame:(CGRect)frame space:(CGFloat)space;
 - (void)setView:(UIView *)view direction:(LHPageViewDirection)direction anime:(BOOL)anime;
 
 @end

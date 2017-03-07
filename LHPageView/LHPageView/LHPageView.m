@@ -29,8 +29,8 @@
     UIView * mainView;//展示视图父控件
     UIView * rightView;//右视图父控件
     
-    CGFloat pageWidth;
-    
+    CGFloat _pageSpace;//间隔距离
+    CGFloat _pageWidth;
     BOOL _obtainView;//是否获取view
     BOOL transitionCompleted;//是否手动拖动
     CGFloat elasticity;//弹性
@@ -44,10 +44,11 @@
 
 @implementation LHPageView
 
-- (instancetype)initWithFrame:(CGRect)frame
-{
+- (instancetype)initWithFrame:(CGRect)frame space:(CGFloat)space{
     self = [super initWithFrame:frame];
     if (self) {
+        _pageSpace = space;
+        _pageWidth = frame.size.width+space;
         [self _init];
     }
     return self;
@@ -68,15 +69,16 @@
     CGFloat height = self.frame.size.height;
     
     leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, width, height)];
-    mainView = [[UIView alloc] initWithFrame:CGRectMake(width, 0, width, height)];
-    rightView = [[UIView alloc] initWithFrame:CGRectMake(width*2, 0, width, height)];
+    mainView = [[UIView alloc] initWithFrame:CGRectMake(width+_pageSpace, 0, width, height)];
+    rightView = [[UIView alloc] initWithFrame:CGRectMake((width+_pageSpace)*2, 0, width, height)];
+
     
     [self.scrollView addSubview:leftView];
     [self.scrollView addSubview:mainView];
     [self.scrollView addSubview:rightView];
     
-    self.scrollView.contentSize = CGSizeMake(width*3, 0);
-    self.scrollView.contentOffset = CGPointMake(width, 0);
+    self.scrollView.contentSize = CGSizeMake(width*3+_pageSpace*2, 0);
+    self.scrollView.contentOffset = CGPointMake(width+_pageSpace, 0);
 
     [self addGestureRecognizer:[[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(pan:)]];
 
@@ -85,13 +87,34 @@
     self.pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(0, self.frame.size.height-20, CGRectGetWidth(self.frame), 20)];
     self.pageControl.pageIndicatorTintColor = [UIColor whiteColor];
     self.pageControl.currentPageIndicatorTintColor = [UIColor redColor];
+    self.pageControl.autoresizingMask  = UIViewAutoresizingFlexibleTopMargin;
     [self addSubview:self.pageControl];
+
 
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         self.pageControl.numberOfPages = [self countOfPageControl];
         self.pageControl.currentPage = [self indexOfPageControl];
     });
 }
+
+- (void)layoutSubviews{
+
+    _pageWidth = self.lh_width + _pageSpace;
+
+    _scrollView.lh_size = self.lh_size;
+
+    leftView.lh_size = self.lh_size;
+
+    mainView.lh_size = self.lh_size;
+    mainView.lh_left = self.lh_width + _pageSpace;
+
+    rightView.lh_size = self.lh_size;
+    rightView.lh_left = (self.lh_width + _pageSpace) * 2;
+
+    self.scrollView.contentSize = CGSizeMake(self.lh_width*3+_pageSpace*2, 0);
+    self.scrollView.contentOffset = CGPointMake(self.lh_width+_pageSpace, 0);
+}
+
 
 - (void)pan:(UIPanGestureRecognizer *)pan{
 
@@ -102,14 +125,14 @@
     [pan setTranslation:CGPointZero inView:self];
 
 
-    if (_scrollView.contentOffset.x < self.frame.size.width && _obtainView) {
+    if ((_scrollView.contentOffset.x < self.frame.size.width) && _obtainView) {
           //获取左侧view
         _obtainView = NO;
         _toView =  [self.dataSource pageView:self viewBeforeView:_currentView];
         _toView.frame = self.bounds;
         [leftView addSubview:_toView];
 
-    }else if(_scrollView.contentOffset.x > self.frame.size.width && _obtainView){
+    }else if((_scrollView.contentOffset.x > self.frame.size.width+_pageSpace*2) && _obtainView){
           //获取右侧view
         _obtainView = NO;
         _toView = [self.dataSource pageView:self viewAfterView:_currentView];
@@ -118,7 +141,7 @@
     }
    
     if (!_toView) {
-        elasticity = (1 - fabsf(_x-self.frame.size.width)/self.frame.size.width)/3;
+        elasticity = (1 - fabs(_x-self.frame.size.width+_pageSpace)/self.frame.size.width)/3;
     }
 
     if (pan.state == UIGestureRecognizerStateEnded) {
@@ -137,9 +160,10 @@
                 [weakSelf updateMainView];
             });
 
-        }else if((_scrollView.contentOffset.x > self.frame.size.width+20) && _toView){
+        }else if((_scrollView.contentOffset.x > self.frame.size.width+_pageSpace*2+20) && _toView){
       //右侧view滑出
-            CGFloat time = (_scrollView.contentOffset.x- self.frame.size.width)/self.frame.size.width/5;
+            CGFloat time = (1-(_scrollView.contentOffset.x- self.frame.size.width)/self.frame.size.width)/5.0;
+            time = fabs(time);
             [UIView animateWithDuration:time animations:^{
                 [weakSelf scrollToRightAnima:NO];
             }];
@@ -160,6 +184,8 @@
     }
 }
 
+
+
 - (void)setView:(UIView *)view direction:(LHPageViewDirection)direction anime:(BOOL)anime{
     if (view.superview) {
         [view removeFromSuperview];
@@ -169,7 +195,7 @@
     //非手动拖动
     transitionCompleted = NO;
     if (direction == LHPageViewDirectionForward) {
-        [leftView addSubview:_toView];
+        [leftView addSubview:view];
         if (anime) {
             CGFloat time =  0.18;
             __weak __typeof(self)weakSelf = self;
@@ -180,7 +206,7 @@
             [self scrollToLeftAnima:NO];
         }
     }else if (direction == LHPageViewDirectionReverse){
-        [rightView addSubview:_toView];
+        [rightView addSubview:view];
         if (anime) {
             CGFloat time =  0.18;
             __weak __typeof(self)weakSelf = self;
@@ -207,11 +233,11 @@
 }
 
 - (void)scrollToRightAnima:(BOOL)anima{
-    [_scrollView setContentOffset:CGPointMake(self.frame.size.width*2, 0) animated:anima];
+    [_scrollView setContentOffset:CGPointMake(_pageWidth*2, 0) animated:anima];
 }
 
 - (void)scrollToMainAnima:(BOOL)anima{
-     [_scrollView setContentOffset:CGPointMake(self.frame.size.width, 0) animated:anima];
+     [_scrollView setContentOffset:CGPointMake(_pageWidth, 0) animated:anima];
 }
 
 //
@@ -236,6 +262,16 @@
     if (_currentView.superview) {
         [_currentView removeFromSuperview];
     }
+    for (UIView *view in mainView.subviews) {
+        [view removeFromSuperview];
+    }
+    for (UIView *view in leftView.subviews) {
+        [view removeFromSuperview];
+    }
+    for (UIView *view in rightView.subviews) {
+        [view removeFromSuperview];
+    }
+    
     [mainView addSubview:_currentView];
     [self scrollToMainAnima:NO];
 
@@ -247,6 +283,16 @@
     }
 }
 
+
+- (void)setNumberOfPages:(NSInteger)numberOfPages{
+    _numberOfPages = numberOfPages;
+    self.pageControl.numberOfPages = numberOfPages;
+}
+
+- (void)setCurrentPage:(NSInteger)currentPage{
+    _currentPage = currentPage;
+    self.pageControl.currentPage = currentPage;
+}
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.

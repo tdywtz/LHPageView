@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4DB7AC9C1E6E38B300295B6A /* LHPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DB7AC9B1E6E38B300295B6A /* LHPageView.m */; };
 		4DCA84721D2661D00010479B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DCA84711D2661D00010479B /* main.m */; };
 		4DCA84751D2661D00010479B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DCA84741D2661D00010479B /* AppDelegate.m */; };
 		4DCA84781D2661D00010479B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DCA84771D2661D00010479B /* ViewController.m */; };
@@ -15,7 +16,6 @@
 		4DCA84801D2661D00010479B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4DCA847E1D2661D00010479B /* LaunchScreen.storyboard */; };
 		4DCA848B1D2661D00010479B /* LHPageViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DCA848A1D2661D00010479B /* LHPageViewTests.m */; };
 		4DCA84961D2661D00010479B /* LHPageViewUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DCA84951D2661D00010479B /* LHPageViewUITests.m */; };
-		4DCA84A71D2662280010479B /* LHPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DCA84A61D2662280010479B /* LHPageView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +36,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4DB7AC9A1E6E38B300295B6A /* LHPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LHPageView.h; sourceTree = "<group>"; };
+		4DB7AC9B1E6E38B300295B6A /* LHPageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LHPageView.m; sourceTree = "<group>"; };
 		4DCA846D1D2661D00010479B /* LHPageView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LHPageView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4DCA84711D2661D00010479B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		4DCA84731D2661D00010479B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -52,8 +54,6 @@
 		4DCA84911D2661D00010479B /* LHPageViewUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LHPageViewUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4DCA84951D2661D00010479B /* LHPageViewUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LHPageViewUITests.m; sourceTree = "<group>"; };
 		4DCA84971D2661D00010479B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4DCA84A51D2662280010479B /* LHPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LHPageView.h; sourceTree = "<group>"; };
-		4DCA84A61D2662280010479B /* LHPageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LHPageView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,8 +147,8 @@
 		4DCA84A41D2662150010479B /* LHPageView */ = {
 			isa = PBXGroup;
 			children = (
-				4DCA84A51D2662280010479B /* LHPageView.h */,
-				4DCA84A61D2662280010479B /* LHPageView.m */,
+				4DB7AC9A1E6E38B300295B6A /* LHPageView.h */,
+				4DB7AC9B1E6E38B300295B6A /* LHPageView.m */,
 			);
 			path = LHPageView;
 			sourceTree = "<group>";
@@ -286,7 +286,7 @@
 				4DCA84781D2661D00010479B /* ViewController.m in Sources */,
 				4DCA84751D2661D00010479B /* AppDelegate.m in Sources */,
 				4DCA84721D2661D00010479B /* main.m in Sources */,
-				4DCA84A71D2662280010479B /* LHPageView.m in Sources */,
+				4DB7AC9C1E6E38B300295B6A /* LHPageView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -510,6 +510,7 @@
 				4DCA849C1D2661D00010479B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4DCA849D1D2661D00010479B /* Build configuration list for PBXNativeTarget "LHPageViewTests" */ = {
 			isa = XCConfigurationList;
@@ -518,6 +519,7 @@
 				4DCA849F1D2661D00010479B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4DCA84A01D2661D00010479B /* Build configuration list for PBXNativeTarget "LHPageViewUITests" */ = {
 			isa = XCConfigurationList;
@@ -526,6 +528,7 @@
 				4DCA84A21D2661D00010479B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
