@@ -8,6 +8,7 @@
 //
 
 #import "LHPageView.h"
+#import "UIView+LH.h"
 
 @interface LHPageScollView : UIScrollView
 

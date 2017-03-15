@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "LHPageView.h"
+#import "CCView.h"
 
 @interface ViewController ()<LHPageViewDataSource,LHPageViewDelegate>
 {
@@ -47,6 +48,11 @@
 
     [self scheduledTimer];
 
+
+    CCView *view = [[CCView alloc] initWithFrame:self.view.frame];
+    [self.view addSubview:view];
+
+  
 }
 
 - (void)scheduledTimer{

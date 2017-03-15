@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		4DB7AC9C1E6E38B300295B6A /* LHPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DB7AC9B1E6E38B300295B6A /* LHPageView.m */; };
+		4DB7ACA81E6EA9FB00295B6A /* UIView+LH.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DB7ACA71E6EA9FB00295B6A /* UIView+LH.m */; };
+		4DB7ACAB1E6EAA1A00295B6A /* CCAA.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4DB7ACA91E6EAA1A00295B6A /* CCAA.cpp */; };
+		4DB7ACAE1E6EAAE800295B6A /* CCView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4DB7ACAD1E6EAAE800295B6A /* CCView.mm */; };
 		4DCA84721D2661D00010479B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DCA84711D2661D00010479B /* main.m */; };
 		4DCA84751D2661D00010479B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DCA84741D2661D00010479B /* AppDelegate.m */; };
 		4DCA84781D2661D00010479B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DCA84771D2661D00010479B /* ViewController.m */; };
@@ -16,6 +19,9 @@
 		4DCA84801D2661D00010479B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4DCA847E1D2661D00010479B /* LaunchScreen.storyboard */; };
 		4DCA848B1D2661D00010479B /* LHPageViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DCA848A1D2661D00010479B /* LHPageViewTests.m */; };
 		4DCA84961D2661D00010479B /* LHPageViewUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DCA84951D2661D00010479B /* LHPageViewUITests.m */; };
+		4DDCF9181E70F11B00083430 /* SimpleVertex.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 4DDCF9171E70F11B00083430 /* SimpleVertex.glsl */; };
+		4DDCF91A1E70F17D00083430 /* SimpleFragment.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 4DDCF9191E70F17D00083430 /* SimpleFragment.glsl */; };
+		4DDCF91D1E70FF2800083430 /* OPGL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4DDCF91B1E70FF2800083430 /* OPGL.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +44,12 @@
 /* Begin PBXFileReference section */
 		4DB7AC9A1E6E38B300295B6A /* LHPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LHPageView.h; sourceTree = "<group>"; };
 		4DB7AC9B1E6E38B300295B6A /* LHPageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LHPageView.m; sourceTree = "<group>"; };
+		4DB7ACA61E6EA9FB00295B6A /* UIView+LH.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+LH.h"; sourceTree = "<group>"; };
+		4DB7ACA71E6EA9FB00295B6A /* UIView+LH.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+LH.m"; sourceTree = "<group>"; };
+		4DB7ACA91E6EAA1A00295B6A /* CCAA.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCAA.cpp; sourceTree = "<group>"; };
+		4DB7ACAA1E6EAA1A00295B6A /* CCAA.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CCAA.hpp; sourceTree = "<group>"; };
+		4DB7ACAC1E6EAAE800295B6A /* CCView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCView.h; sourceTree = "<group>"; };
+		4DB7ACAD1E6EAAE800295B6A /* CCView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CCView.mm; sourceTree = "<group>"; };
 		4DCA846D1D2661D00010479B /* LHPageView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LHPageView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4DCA84711D2661D00010479B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		4DCA84731D2661D00010479B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -54,6 +66,10 @@
 		4DCA84911D2661D00010479B /* LHPageViewUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LHPageViewUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4DCA84951D2661D00010479B /* LHPageViewUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LHPageViewUITests.m; sourceTree = "<group>"; };
 		4DCA84971D2661D00010479B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4DDCF9171E70F11B00083430 /* SimpleVertex.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SimpleVertex.glsl; sourceTree = "<group>"; };
+		4DDCF9191E70F17D00083430 /* SimpleFragment.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SimpleFragment.glsl; sourceTree = "<group>"; };
+		4DDCF91B1E70FF2800083430 /* OPGL.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OPGL.cpp; sourceTree = "<group>"; };
+		4DDCF91C1E70FF2800083430 /* OPGL.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = OPGL.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +125,14 @@
 				4DCA84741D2661D00010479B /* AppDelegate.m */,
 				4DCA84761D2661D00010479B /* ViewController.h */,
 				4DCA84771D2661D00010479B /* ViewController.m */,
+				4DB7ACA91E6EAA1A00295B6A /* CCAA.cpp */,
+				4DB7ACAA1E6EAA1A00295B6A /* CCAA.hpp */,
+				4DB7ACAC1E6EAAE800295B6A /* CCView.h */,
+				4DB7ACAD1E6EAAE800295B6A /* CCView.mm */,
+				4DDCF91B1E70FF2800083430 /* OPGL.cpp */,
+				4DDCF91C1E70FF2800083430 /* OPGL.hpp */,
+				4DDCF9171E70F11B00083430 /* SimpleVertex.glsl */,
+				4DDCF9191E70F17D00083430 /* SimpleFragment.glsl */,
 				4DCA84791D2661D00010479B /* Main.storyboard */,
 				4DCA847C1D2661D00010479B /* Assets.xcassets */,
 				4DCA847E1D2661D00010479B /* LaunchScreen.storyboard */,
@@ -147,6 +171,8 @@
 		4DCA84A41D2662150010479B /* LHPageView */ = {
 			isa = PBXGroup;
 			children = (
+				4DB7ACA61E6EA9FB00295B6A /* UIView+LH.h */,
+				4DB7ACA71E6EA9FB00295B6A /* UIView+LH.m */,
 				4DB7AC9A1E6E38B300295B6A /* LHPageView.h */,
 				4DB7AC9B1E6E38B300295B6A /* LHPageView.m */,
 			);
@@ -220,6 +246,7 @@
 				TargetAttributes = {
 					4DCA846C1D2661D00010479B = {
 						CreatedOnToolsVersion = 7.2.1;
+						DevelopmentTeam = MFH5RT668M;
 					};
 					4DCA84851D2661D00010479B = {
 						CreatedOnToolsVersion = 7.2.1;
@@ -257,8 +284,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				4DCA84801D2661D00010479B /* LaunchScreen.storyboard in Resources */,
+				4DDCF9181E70F11B00083430 /* SimpleVertex.glsl in Resources */,
 				4DCA847D1D2661D00010479B /* Assets.xcassets in Resources */,
 				4DCA847B1D2661D00010479B /* Main.storyboard in Resources */,
+				4DDCF91A1E70F17D00083430 /* SimpleFragment.glsl in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -284,7 +313,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				4DCA84781D2661D00010479B /* ViewController.m in Sources */,
+				4DB7ACAE1E6EAAE800295B6A /* CCView.mm in Sources */,
+				4DB7ACA81E6EA9FB00295B6A /* UIView+LH.m in Sources */,
+				4DDCF91D1E70FF2800083430 /* OPGL.cpp in Sources */,
 				4DCA84751D2661D00010479B /* AppDelegate.m in Sources */,
+				4DB7ACAB1E6EAA1A00295B6A /* CCAA.cpp in Sources */,
 				4DCA84721D2661D00010479B /* main.m in Sources */,
 				4DB7AC9C1E6E38B300295B6A /* LHPageView.m in Sources */,
 			);
@@ -425,6 +458,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = MFH5RT668M;
 				INFOPLIST_FILE = LHPageView/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.12365auto.LHPageView;
@@ -436,6 +470,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = MFH5RT668M;
 				INFOPLIST_FILE = LHPageView/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.12365auto.LHPageView;
